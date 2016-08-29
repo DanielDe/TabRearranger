@@ -1,12 +1,11 @@
 chrome.commands.onCommand.addListener(command => {
     let leftRightCommands = ['move-tab-left', 'move-tab-right'];
-    let upDownCommands = ['move-tab-to-next-window', 'move-tab-to-previous-window'];
+    let upDownCommands = ['move-tab-to-next-window'];
     
     var indexStep = {
         'move-tab-left': -1,
         'move-tab-right': 1,
-        'move-tab-to-next-window': 1,
-        'move-tab-to-previous-window': -1
+        'move-tab-to-next-window': 1
     }[command];
 
     let shiftTabInWindow = tabs => {
@@ -17,7 +16,6 @@ chrome.commands.onCommand.addListener(command => {
 
     let moveTabToWindow = tabs => {
         let currentTab = tabs[0];
-        
         chrome.windows.getAll({ windowTypes: ['normal'] }, windows => {
             let currentWindowIndex = windows.map(window => window.focused).indexOf(true);
             let newIndex = (currentWindowIndex + indexStep) % windows.length;
@@ -31,8 +29,25 @@ chrome.commands.onCommand.addListener(command => {
             chrome.tabs.update(currentTab.id, { active: true });
         });
     };
-    
-    let callback = leftRightCommands.indexOf(command) !== -1 ? shiftTabInWindow : moveTabToWindow;
+
+    let moveTabToNewWindow = tabs => {
+        let currentTab = tabs[0];
+
+        chrome.windows.getCurrent({ populate: true }, window => {
+            if (window.tabs.length !== 1) {
+                chrome.windows.create({ tabId: currentTab.id });
+            }
+        });
+    };
+
+    let callback = undefined;
+    if (leftRightCommands.indexOf(command) !== -1) {
+        callback = shiftTabInWindow;
+    } else if (upDownCommands.indexOf(command) !== -1) {
+        callback = moveTabToWindow;
+    } else {
+        callback = moveTabToNewWindow;
+    }
 
     [true, false].forEach(pinned => {
         chrome.tabs.query({

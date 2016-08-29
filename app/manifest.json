@@ -38,13 +38,13 @@
             },
             "description": "Move active tab to next window"
         },
-        "move-tab-to-previous-window": {
+        "move-tab-to-new-window": {
             "suggested_key": {
-                "default": "Shift+Alt+Down",
-                "windows": "Shift+Alt+Down",
-                "mac": "MacCtrl+Shift+Down"
+                "default": "Shift+Alt+N",
+                "windows": "Shift+Alt+N",
+                "mac": "MacCtrl+Shift+N"
             },
-            "description": "Move active tab to previous window"
+            "description": "Move active tab to new window"
         }
     }
 }
