@@ -1,0 +1,10 @@
+{
+  "appName": {
+    "message": "tab_rearranger",
+    "description": "The name of the application"
+  },
+  "appDescription": {
+    "message": "Rearrange tabs and move them between windows using keyboard shortcuts",
+    "description": "The description of the application"
+  }
+}
