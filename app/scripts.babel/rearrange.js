@@ -48,6 +48,7 @@ chrome.commands.onCommand.addListener(command => {
 
     let moveTabToWindow = tabs => {
         let currentTab = tabs[0];
+        let tabPinned = currentTab.pinned;
         chrome.windows.getAll({ windowTypes: ['normal'] }, windows => {
             let currentWindowIndex = windows.map(window => window.focused).indexOf(true);
             let newIndex = (currentWindowIndex + indexStep) % windows.length;
@@ -58,7 +59,7 @@ chrome.commands.onCommand.addListener(command => {
 
             chrome.tabs.move(currentTab.id, { index: -1, windowId: newWindow.id });
             chrome.windows.update(newWindow.id, { focused: true });
-            chrome.tabs.update(currentTab.id, { active: true });
+            chrome.tabs.update(currentTab.id, { active: true, pinned: tabPinned });
         });
     };
 
