@@ -8,10 +8,42 @@ chrome.commands.onCommand.addListener(command => {
         'move-tab-to-next-window': 1
     }[command];
 
+    let getNumTabsInCurrentWindow = callback => {
+        chrome.windows.getCurrent({ populate: true }, window => {
+            callback(window.tabs.length);
+        });
+    };
+
+    let getNumPinnedTabsInCurrentWindow = callback => {
+        chrome.tabs.query({
+            currentWindow: true,
+            pinned: true
+        }, tabs => {
+            callback(tabs.length);
+        });
+    };
+
     let shiftTabInWindow = tabs => {
         let currentTab = tabs[0];
-        // TODO: wrap around.
-        chrome.tabs.move(currentTab.id, { index: (currentTab.index + indexStep) });
+
+        getNumTabsInCurrentWindow(numTabs => {
+            getNumPinnedTabsInCurrentWindow(numPinnedTabs => {
+                let numUnPinnedTabs = numTabs - numPinnedTabs;
+                var newIndex = currentTab.index + indexStep;
+                if (currentTab.pinned) {
+                    newIndex = newIndex % numPinnedTabs;
+                    if (newIndex === -1) {
+                        newIndex = numPinnedTabs - 1;
+                    }
+                } else {
+                    newIndex = (newIndex - numPinnedTabs) % numUnPinnedTabs + numPinnedTabs;
+                    if (newIndex === numPinnedTabs - 1) {
+                        newIndex = -1;
+                    }
+                }
+                chrome.tabs.move(currentTab.id, { index: newIndex });
+            });
+        });
     };
 
     let moveTabToWindow = tabs => {
