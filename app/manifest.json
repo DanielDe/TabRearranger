@@ -12,25 +12,25 @@
     "commands": {
         "move-tab-left": {
             "suggested_key": {
-                "default": "Shift+Alt+Left",
-                "windows": "Shift+Alt+Left",
-                "mac": "MacCtrl+Shift+Left"
+                "default": "Shift+Alt+B",
+                "windows": "Shift+Alt+B",
+                "mac": "MacCtrl+Shift+B"
             },
             "description": "Move active tab left"
         },
         "move-tab-right": {
             "suggested_key": {
-                "default": "Shift+Alt+Right",
-                "windows": "Shift+Alt+Right",
-                "mac": "MacCtrl+Shift+Right"
+                "default": "Shift+Alt+F",
+                "windows": "Shift+Alt+F",
+                "mac": "MacCtrl+Shift+F"
             },
             "description": "Move active tab right"
         },
         "move-tab-to-next-window": {
             "suggested_key": {
-                "default": "Shift+Alt+Up",
-                "windows": "Shift+Alt+Up",
-                "mac": "MacCtrl+Shift+Up"
+                "default": "Shift+Alt+P",
+                "windows": "Shift+Alt+P",
+                "mac": "MacCtrl+Shift+P"
             },
             "description": "Move active tab to next window"
         },
