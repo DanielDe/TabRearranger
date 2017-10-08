@@ -13,7 +13,16 @@ Chrome extension to rearrange tabs and move them between windows with keyboard s
 
 ## Custom keyboard shorcuts
 
-You can specify your own keyboard shortcuts by clicking the `Keyboard shortcuts button` at the bottom of the chrome://extensions page
+You can specify your own keyboard shortcuts by clicking the `Keyboard shortcuts` button at the bottom of the chrome://extensions page
+
+I use these shortcuts (they're more Emacsy):
+
+| Command | Mac |
+| ------- | --- |
+| Move current tab right | `Control+Shift+f` |
+| Move current tab left | `Control+Shift+b` |
+| Move current tab to new window | `Control+Shift+n` |
+| Move current tab to next window | `Control+Shift+p` |
 
 ## Installation
 
