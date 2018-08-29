@@ -1,6 +1,6 @@
 {
     "name": "Tab Rearranger",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "manifest_version": 2,
     "description": "Rearrange tabs using keyboard shortcuts",
     "background": {
@@ -40,6 +40,9 @@
                 "mac": "MacCtrl+Shift+N"
             },
             "description": "Move active tab to new window"
+        },
+        "move-multiple-tabs-to-new-window": {
+            "description": "Move multiple tabs to new window"
         }
     }
 }

@@ -71,12 +71,33 @@ chrome.commands.onCommand.addListener(command => {
     });
   };
 
-  let moveTabToNewWindow = tabs => {
+  const moveTabToNewWindow = tabs => {
     const currentTab = tabs[0];
 
     chrome.windows.getCurrent({ populate: true }, window => {
       if (window.tabs.length !== 1) {
         chrome.windows.create({ tabId: currentTab.id });
+      }
+    });
+  };
+
+  const moveMultipleTabsToNewWindow = tabs => {
+    console.log("tabs = ", tabs);
+    const numTabs = parseInt(prompt('How many tabs?'));
+    if (isNaN(numTabs)) {
+      return;
+    }
+
+    const currentTabIndex = tabs.findIndex(tab => tab.active);
+    const tabsToMove = tabs.slice(Math.max(0, currentTabIndex - numTabs + 1), currentTabIndex);
+
+    chrome.windows.getCurrent({ populate: true }, window => {
+      if (window.tabs.length !== 1) {
+        chrome.windows.create({ tabId: tabs[currentTabIndex].id }, newWindow => {
+          tabsToMove.reverse().forEach(tab => {
+            chrome.tabs.move(tab.id, { index: 0, windowId: newWindow.id });
+          });
+        });
       }
     });
   };
@@ -97,6 +118,11 @@ chrome.commands.onCommand.addListener(command => {
     executeCommand(moveTabToWindow);
   } else if (command === 'move-tab-to-new-window') {
     executeCommand(moveTabToNewWindow);
+  } else if (command === 'move-multiple-tabs-to-new-window') {
+    chrome.tabs.query({
+      currentWindow: true,
+      pinned: false,
+    }, moveMultipleTabsToNewWindow);
   } else {
     alert(`Tab rearranger doesn't recognize the command "${command}"`);
   }
