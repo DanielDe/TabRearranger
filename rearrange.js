@@ -4,7 +4,7 @@ chrome.commands.onCommand.addListener(command => {
   const indexStep = {
     'move-tab-left': -1,
     'move-tab-right': 1,
-    'move-tab-to-next-window': 1
+    'move-tab-to-next-window': 1,
   }[command];
 
   const getNumTabsInCurrentWindow = () => {
@@ -17,12 +17,15 @@ chrome.commands.onCommand.addListener(command => {
 
   const getNumPinnedTabsInCurrentWindow = () => {
     return new Promise((resolve, reject) => {
-      chrome.tabs.query({
-        currentWindow: true,
-        pinned: true
-      }, tabs => {
-        resolve(tabs.length);
-      });
+      chrome.tabs.query(
+        {
+          currentWindow: true,
+          pinned: true,
+        },
+        tabs => {
+          resolve(tabs.length);
+        }
+      );
     });
   };
 
@@ -43,7 +46,7 @@ chrome.commands.onCommand.addListener(command => {
             newIndex = numPinnedTabs - 1;
           }
         } else {
-          newIndex = (newIndex - numPinnedTabs) % numUnPinnedTabs + numPinnedTabs;
+          newIndex = ((newIndex - numPinnedTabs) % numUnPinnedTabs) + numPinnedTabs;
           if (newIndex === numPinnedTabs - 1) {
             newIndex = -1;
           }
@@ -67,7 +70,10 @@ chrome.commands.onCommand.addListener(command => {
 
       chrome.tabs.move(currentTab.id, { index: -1, windowId: newWindow.id });
       chrome.windows.update(newWindow.id, { focused: true });
-      chrome.tabs.update(currentTab.id, { active: true, pinned: currentTab.pinned });
+      chrome.tabs.update(currentTab.id, {
+        active: true,
+        pinned: currentTab.pinned,
+      });
     });
   };
 
@@ -82,7 +88,6 @@ chrome.commands.onCommand.addListener(command => {
   };
 
   const moveMultipleTabsToNewWindow = tabs => {
-    console.log("tabs = ", tabs);
     const numTabs = parseInt(prompt('How many tabs?'));
     if (isNaN(numTabs)) {
       return;
@@ -104,11 +109,14 @@ chrome.commands.onCommand.addListener(command => {
 
   const executeCommand = commandCallback => {
     [true, false].forEach(pinned => {
-      chrome.tabs.query({
-        active: true,
-        currentWindow: true,
-        pinned
-      }, commandCallback);
+      chrome.tabs.query(
+        {
+          active: true,
+          currentWindow: true,
+          pinned,
+        },
+        commandCallback
+      );
     });
   };
 
@@ -119,10 +127,13 @@ chrome.commands.onCommand.addListener(command => {
   } else if (command === 'move-tab-to-new-window') {
     executeCommand(moveTabToNewWindow);
   } else if (command === 'move-multiple-tabs-to-new-window') {
-    chrome.tabs.query({
-      currentWindow: true,
-      pinned: false,
-    }, moveMultipleTabsToNewWindow);
+    chrome.tabs.query(
+      {
+        currentWindow: true,
+        pinned: false,
+      },
+      moveMultipleTabsToNewWindow
+    );
   } else {
     alert(`Tab rearranger doesn't recognize the command "${command}"`);
   }
