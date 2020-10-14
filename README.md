@@ -2,6 +2,8 @@
 
 Browser extension to rearrange tabs and move them between windows with keyboard shortcuts.
 
+This extension is simple, but I can no longer live without it.
+
 Install in [Chrome](https://chrome.google.com/webstore/detail/tab-rearranger/dapkahjmelfklmpmilfdmlggcbnpcndd) or [Firefox](https://addons.mozilla.org/en-US/firefox/addon/tab-rearranger/).
 
 ![Demo](./demo.gif)
