@@ -12,7 +12,7 @@ Install in [Chrome](https://chrome.google.com/webstore/detail/tab-rearranger/dap
 
 This extension uses an older version of the manifest file, but it still works great. To install:
 
-1. Click the green Code button at the top right of the page and select "Download ZIP".
+1. Click the green Code button at the top right of this page and select "Download ZIP".
 2. Unzip the downloaded file and move the contents to a permanent location on your system. 
 3. Navigate to `chrome://extensions`
 4. Make sure that "Developer mode" is enabled in the top right corner.
