@@ -55,6 +55,3 @@ I use these shortcuts (they're more Emacsy):
 2. Click on the `...` icon next to Tab Rearranger and select "Manage"
 3. Click on the cog icon in the upper right hand corner and select "Manage Extension Shortcuts"
 
-## More things I've built
-
-I make things that scratch my own itches, so if you like this you might like some of the other stuff I've built too, like [Keysmith](https://keysmith.app), [Find Hacker News Comments](https://github.com/DanielDe/FindHackerNewsComments), [Window Flicker](https://www.danielde.dev/window-flicker), and [org-web](https://github.com/danielde/org-web).
