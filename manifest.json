@@ -1,13 +1,13 @@
 {
+  "manifest_version": 3,
   "name": "Tab Rearranger",
-  "version": "1.1.0",
-  "manifest_version": 2,
+  "version": "1.2.0",
   "description": "Rearrange tabs using keyboard shortcuts",
   "background": {
-    "scripts": ["rearrange.js"],
-    "persistent": false
+    "service_worker": "rearrange.js",
+    "type": "module"
   },
-  "permissions": ["tabs"],
+  "permissions": ["tabs", "commands"],
   "commands": {
     "move-tab-left": {
       "suggested_key": {
@@ -42,11 +42,6 @@
       "description": "Move active tab to new window"
     },
     "move-multiple-tabs-to-new-window": {
-      "suggested_key": {
-        "default": "Shift+Alt+M",
-        "windows": "Shift+Alt+M",
-        "mac": "MacCtrl+Shift+M"
-      },
       "description": "Move multiple tabs to new window"
     }
   }
