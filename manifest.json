@@ -7,7 +7,7 @@
     "service_worker": "rearrange.js",
     "type": "module"
   },
-  "permissions": ["tabs", "commands"],
+  "permissions": ["commands"],
   "commands": {
     "move-tab-left": {
       "suggested_key": {
